@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+/build
+/dev-dist
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+yarn-error.log
+vite.config.js.timestamp*.mjs
+/test-results
