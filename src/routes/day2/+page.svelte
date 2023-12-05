@@ -1,4 +1,5 @@
 <script>
+  import { enhance } from '$app/forms';
   export let form;
 </script>
 
@@ -6,7 +7,7 @@
   Sum is: {form.sum}
 {/if}
 
-<form method="POST">
+<form method="POST" action="?/power" use:enhance>
   <label for="games">Input</label>
   <textarea rows="10" columns="25" name="games"></textarea>
   <input type="submit" value="Submit">
