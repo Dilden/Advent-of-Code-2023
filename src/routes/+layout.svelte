@@ -1,12 +1,12 @@
 <main>
-  <slot />
+	<slot />
 </main>
 
 <style>
-  main {
-    width: 500px;
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-  }
+	main {
+		max-width: 900px;
+		text-align: center;
+		display: block;
+		margin: 0 auto;
+	}
 </style>

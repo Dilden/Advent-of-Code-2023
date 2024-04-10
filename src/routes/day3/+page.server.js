@@ -1,3 +1,5 @@
+import { findAllSymbols, findAllNums, hasSymbolNearby } from './utils.js';
+
 export const actions = {
 	engine: async ({ request }) => {
 		const data = await request.formData();
@@ -7,35 +9,31 @@ export const actions = {
 		const symbols = findAllSymbols(schema);
 		const nums = findAllNums(schema);
 
+		console.log(symbols);
 		console.log(nums);
+
+		const sumsOfNums = nums
+			.map((num) => {
+				const digitIsNearSymbol = num.n.split('').map((digit, index) => {
+					const newX = num.x + index;
+
+					num.x = newX;
+					return hasSymbolNearby(symbols, num);
+				});
+
+				if (digitIsNearSymbol.includes(true)) {
+					return Number(num.n);
+				}
+			})
+			.filter((x) => {
+				if (x) {
+					return x;
+				}
+			})
+			.reduce((a, b) => a + b, 0);
+
 		return {
-			sum: 0,
-			...symbols,
-			...nums
+			sum: sumsOfNums
 		};
 	}
-};
-
-export const findAllSymbols = (text) => {
-	return findAllCoords(text, /[$&+,:;=?@#|'<>^*()%!-]/g);
-};
-
-export const findAllNums = (text) => {
-	return findAllCoords(text, /(\d+)/g);
-};
-
-const findAllCoords = (text, regex) => {
-	const map = text.split(`\n`);
-	const coords = [];
-
-	map.map((line, y) => {
-		const found = line.match(regex);
-		if (found) {
-			found.map((special) => {
-				coords.push({ x: line.indexOf(special), y: y - 1, l: special.length });
-			});
-		}
-	});
-
-	return coords;
 };
