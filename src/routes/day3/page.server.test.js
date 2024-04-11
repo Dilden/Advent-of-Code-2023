@@ -3,6 +3,36 @@ import { createFormDataRequest } from 'src/factories/createFormDataRequest.js';
 import { actions } from './+page.server.js';
 
 describe('day 3', () => {
+	it('returns correct answer from schematic8', async () => {
+		const request = createFormDataRequest({
+			schema: schematic8
+		});
+
+		const res = await actions.engine({ request });
+		expect(res).toEqual({
+			sum: ans8
+		});
+	});
+	it('returns correct answer from schematic9', async () => {
+		const request = createFormDataRequest({
+			schema: schematic9
+		});
+
+		const res = await actions.engine({ request });
+		expect(res).toEqual({
+			sum: ans9
+		});
+	});
+	it('returns correct answer from schematic7', async () => {
+		const request = createFormDataRequest({
+			schema: schematic7
+		});
+
+		const res = await actions.engine({ request });
+		expect(res).toEqual({
+			sum: ans7
+		});
+	});
 	it('returns correct answer from schematic6', async () => {
 		const request = createFormDataRequest({
 			schema: schematic6
@@ -141,3 +171,22 @@ const schematic6 = `
 21............
 ...*9.........
 `;
+
+const ans7 = 0;
+const schematic7 = `
+100
+200
+`;
+const ans8 = 0;
+const schematic8 = `
+.....=..
+.744....
+`;
+
+const ans9 = 1192;
+const schematic9 = `
+...196.745.996....
+.....*.......*....
+`;
+
+const finalAnswer = 520019;

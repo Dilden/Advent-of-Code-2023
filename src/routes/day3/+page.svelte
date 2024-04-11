@@ -6,6 +6,13 @@
 {#if form?.sum}
 	Sum is: {form.sum}
 {/if}
+{#if form?.nums}
+	<ul>
+		{#each form.nums as number}
+			<li>{number}</li>
+		{/each}
+	</ul>
+{/if}
 
 <form method="POST" action="?/engine" use:enhance>
 	<label for="schema">Input</label>

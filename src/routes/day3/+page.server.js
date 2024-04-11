@@ -11,11 +11,17 @@ export const actions = {
 
 		const sumsOfNums = nums
 			.map((num) => {
-				const digitIsNearSymbol = num.n.split('').map((digit, index) => {
-					const newX = num.x + index;
+				// need to check each digit of a number
+				// hasSymbolNearby requires an entire number object though
+				//  ex. { x: 1, y: 2, l: '345'}
+				const numberStringArray = num.n.split('');
 
-					num.x = newX;
-					return hasSymbolNearby(symbols, num);
+				const allNumberObjs = numberStringArray.map((digit, index) => {
+					return { x: num.x + index, y: num.y, l: digit };
+				});
+
+				const digitIsNearSymbol = allNumberObjs.map((numberObj) => {
+					return hasSymbolNearby(symbols, numberObj);
 				});
 
 				if (digitIsNearSymbol.includes(true)) {

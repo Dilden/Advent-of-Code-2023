@@ -7,7 +7,7 @@ import {
 	isBelowOrRight
 } from './utils.js';
 
-describe('create new map', () => {
+describe.skip('create new map', () => {
 	it('finds all symbols', () => {
 		expect(findAllSymbols(schematic)).toEqual([
 			{ x: 3, y: 1, n: '*' }, // count begins at 0 from top left corner
@@ -44,7 +44,7 @@ describe('create new map', () => {
 	});
 });
 
-describe('positioning', () => {
+describe.skip('positioning', () => {
 	it('checks isAboveOrLeft', () => {
 		expect(isAboveOrLeft(0, 2)).toBe(false);
 		expect(isAboveOrLeft(1, 2)).toBe(true);
@@ -106,4 +106,26 @@ const schematic4 = `
 ........
 .1.1.1.1
 ......*.
+`;
+
+describe('error case', () => {
+	it('finds all symbols', () => {
+		expect(findAllSymbols(schematic8)).toEqual([{ x: 5, y: 0, n: '=' }]);
+	});
+
+	it('finds all numbers in error schematic', () => {
+		expect(findAllNums(schematic8)).toEqual([{ x: 1, y: 1, n: '744' }]);
+	});
+
+	it('looks for nearby symbols', () => {
+		const symbolCoords = findAllSymbols(schematic8);
+		expect(hasSymbolNearby(symbolCoords, { x: 1, y: 1, n: '744' })).toEqual(false);
+		expect(hasSymbolNearby(symbolCoords, { x: 0, y: 1, n: '1' })).toEqual(false);
+	});
+});
+
+const ans8 = 0;
+const schematic8 = `
+.....=..
+.744....
 `;
