@@ -9,9 +9,6 @@ export const actions = {
 		const symbols = findAllSymbols(schema);
 		const nums = findAllNums(schema);
 
-		console.log(symbols);
-		console.log(nums);
-
 		const sumsOfNums = nums
 			.map((num) => {
 				const digitIsNearSymbol = num.n.split('').map((digit, index) => {

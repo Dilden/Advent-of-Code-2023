@@ -33,10 +33,12 @@ const findAllCoords = (text, regex) => {
 	const coords = [];
 
 	map.map((line, y) => {
-		const found = line.match(regex);
-		if (found) {
+		const found = [...line.matchAll(regex)];
+		// const found = line.match(regex);
+		if (found.length) {
+			// found is an array
 			found.map((special) => {
-				coords.push({ x: line.indexOf(special), y: y - 1, n: special });
+				coords.push({ x: special.index, y: y - 1, n: special[0] });
 			});
 		}
 	});
